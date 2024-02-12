@@ -1,4 +1,4 @@
-var rNCount=85,interactable=10;
+var rNCount=100,interactable=16;
 var timeleft=8000;
 rN=new Array(
 	"This is the first Newsticker!",
@@ -85,22 +85,62 @@ rN=new Array(
 	"Now playing: Ether Strike - Akira Complex",
 	"Update log: V20240211 - Added 60 newstickers and basic functions.",
 	"2 - 2 - 2... ok... 6 - 6 - 24' - 32' - HOLD ON!... - 3 5 2 4 4 fff 3 ... NICE!!!",
-	"You have got past the great Wall, but don't let that wall in your heart stop you. Get over it."
+	"You have got past the great Wall, but don't let that wall in your heart stop you. Get over it.",
+	"This is a coarse game. --- yhvr",
+	"Newsticker Idle has added another prestige layer: Storage! Reset your LocalStorage to acquire Storage space. No, Don't do that!",
+	"Clicking on this news gives +1 extra read news! Works with privileges.",
+	"Reading this news gives a wapping +50 clicks! Works with privileges.",
+	"There might be upgrades you can buy somewhere.",
+	"There might be/might have been a privilege here.",
+	"Reading is harder to acquire than counting. Wise decision.",
+	"Knowledge is power.",
+	"Click Click",
+	"Mouse is overpowered.",
+	"dClick.onclick *= 2",
+	"Now this game should finally be a normal idle game.",
+	"Update log: V20240212 - Added 40 more newstickers, 6 Upgrades and a lot more content!",
+	"Coming soon in 8 seconds...",
+	"Do you know that the loading news is there just to prevent you from cheating?"
 );
 var totalNewsRead=0,totalNewsClicked=0;
 var paperclip=0,currentCapTier=0;
-var interacted=new Array(0,0,0,0,0,0,0,0,0,0);
+var interacted=new Array(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
+function icrr(num){
+	var incr=num;
+	if(interacted[10])incr*=2;
+	if(interacted[11])incr*=2;
+	if(interacted[12])incr*=2;
+	totalNewsRead+=incr;
+	totalNewsRead=Math.floor(totalNewsRead+0.1);
+}
+function icrc(num){
+	var incr=num;
+	if(interacted[13])incr*=2;
+	if(interacted[14])incr*=2;
+	if(interacted[15])incr*=2;
+	totalNewsClicked+=incr;
+	totalNewsClicked=Math.floor(totalNewsClicked+0.1);
+}
 setInterval(function(){
 	var currentCap=Math.floor(25*(currentCapTier+1)*(currentCapTier+2)+0.1);
 	if(timeleft<=0){
 		rnd=Math.floor(Math.random() * Math.min(rNCount,currentCap));
-		if(rnd>=45&&rnd<=54&&(!interacted[rnd-45]))document.getElementById("main1").innerHTML="<div id=\"rn\" class=\"center\" onclick=\"executeNews("+rnd+")\">"+"Click here to get 1 free paperclip!"+"</div>";
+		if(rnd>=45&&rnd<=52&&(!interacted[rnd-45]))document.getElementById("main1").innerHTML="<div id=\"rn\" class=\"center\" onclick=\"executeNews("+rnd+")\">"+"Click here to get 1 free paperclip!"+"</div>";
+		else if(rnd==53&&(!interacted[rnd-45]))document.getElementById("main1").innerHTML="<div id=\"rn\" class=\"center\" onclick=\"executeNews("+rnd+")\">"+"Click here to buy 1 paperclip for 10000 read news!"+"</div>";
+		else if(rnd==54&&(!interacted[rnd-45]))document.getElementById("main1").innerHTML="<div id=\"rn\" class=\"center\" onclick=\"executeNews("+rnd+")\">"+"Click here to buy 1 paperclip for 30000 clicks!"+"</div>";
+		else if(rnd==90&&(!interacted[rnd-80]))document.getElementById("main1").innerHTML="<div id=\"rn\" class=\"center\" onclick=\"executeNews("+rnd+")\">"+"Click here to acquire the privilege of getting 2x reads by reading for 100 reads only!"+"</div>";
+		else if(rnd==91&&(!interacted[rnd-80])&&(interacted[rnd-81]))document.getElementById("main1").innerHTML="<div id=\"rn\" class=\"center\" onclick=\"executeNews("+rnd+")\">"+"Click here to acquire the privilege of getting 2x reads by reading for 200 reads only!"+"</div>";
+		else if(rnd==92&&(!interacted[rnd-80])&&(interacted[rnd-81]))document.getElementById("main1").innerHTML="<div id=\"rn\" class=\"center\" onclick=\"executeNews("+rnd+")\">"+"Click here to acquire the privilege of getting 2x reads by reading for 400 reads only!"+"</div>";
+		else if(rnd==93&&(!interacted[rnd-80]))document.getElementById("main1").innerHTML="<div id=\"rn\" class=\"center\" onclick=\"executeNews("+rnd+")\">"+"Click here to acquire the privilege of getting 2x clicks by clicking for 300 clicks only!"+"</div>";
+		else if(rnd==94&&(!interacted[rnd-80])&&(interacted[rnd-81]))document.getElementById("main1").innerHTML="<div id=\"rn\" class=\"center\" onclick=\"executeNews("+rnd+")\">"+"Click here to acquire the privilege of getting 2x clicks by clicking for 600 clicks only!"+"</div>";
+		else if(rnd==95&&(!interacted[rnd-80])&&(interacted[rnd-81]))document.getElementById("main1").innerHTML="<div id=\"rn\" class=\"center\" onclick=\"executeNews("+rnd+")\">"+"Click here to acquire the privilege of getting 2x clicks by clicking for 1200 clicks only!"+"</div>";
 		else document.getElementById("main1").innerHTML="<div id=\"rn\" class=\"center\" onclick=\"executeNews("+rnd+")\">"+rN[rnd]+"</div>";
 		timeleft+=8000;
 		var increment=1;
 		if(rnd==61)increment*=10;
-		totalNewsRead+=increment;
-		totalNewsRead=Math.floor(totalNewsRead+0.1);
+		icrr(increment);
+		increment=1;
+		if(rnd==88)icrc(50);
 		document.getElementById("s1").innerHTML="You have read a total of "+totalNewsRead+" news.";
 		Save();
 	}
@@ -109,19 +149,101 @@ setInterval(function(){
 function executeNews(num){
 	var increment=1;
 	if(num==60)increment*=3;
-	totalNewsClicked+=increment;
-	totalNewsClicked=Math.floor(totalNewsClicked+0.1);
-	document.getElementById("s2").innerHTML="You have clicked on a total of "+totalNewsClicked+" news.";
-	if(45<=num&&num<=54){
+	icrc(increment);
+	increment=1;
+	if(num==87)icrr(1);
+	if(45<=num&&num<=52){
 		if(!interacted[num-45]){
 			paperclip++;
 			document.getElementById("main1").innerHTML="<div id=\"rn\" class=\"center\">"+rN[num]+"</div>";
 		}
 		interacted[num-45]=1;
 	}
-	if(num==78)totalNewsClicker*=Math.floor(Math.random()*2)*2;
+	if(num==53&&(!interacted[num-45])){
+		if(totalNewsRead>=10000){
+			totalNewsRead-=10000;
+			document.getElementById("main1").innerHTML="<div id=\"rn\" class=\"center\">"+"Thank you for the purchase!"+"</div>";
+			paperclip++;
+		}
+		else{
+			document.getElementById("main1").innerHTML="<div id=\"rn\" class=\"center\">"+"You cannot afford it!"+"</div>";
+		}
+	}
+	if(num==54&&(!interacted[num-45])){
+		if(totalNewsClicked>=30000){
+			totalNewsClicked-=30000;
+			document.getElementById("main1").innerHTML="<div id=\"rn\" class=\"center\">"+"Thank you for the purchase!"+"</div>";
+			paperclip++;
+		}
+		else{
+			document.getElementById("main1").innerHTML="<div id=\"rn\" class=\"center\">"+"You cannot afford it!"+"</div>";
+		}
+	}
+	if(num==90&&(!interacted[num-80])){
+		if(totalNewsRead>=100){
+			totalNewsRead-=100;
+			document.getElementById("main1").innerHTML="<div id=\"rn\" class=\"center\">"+"Thank you for the purchase!"+"</div>";
+			interacted[num-80]=1;
+		}
+		else{
+			document.getElementById("main1").innerHTML="<div id=\"rn\" class=\"center\">"+"You cannot afford it!"+"</div>";
+		}
+	}
+	if(num==91&&(!interacted[num-80])&&(interacted[num-81])){
+		if(totalNewsRead>=200){
+			totalNewsRead-=200;
+			document.getElementById("main1").innerHTML="<div id=\"rn\" class=\"center\">"+"Thank you for the purchase!"+"</div>";
+			interacted[num-80]=1;
+		}
+		else{
+			document.getElementById("main1").innerHTML="<div id=\"rn\" class=\"center\">"+"You cannot afford it!"+"</div>";
+		}
+	}
+	if(num==92&&(!interacted[num-80])&&(interacted[num-81])){
+		if(totalNewsRead>=400){
+			totalNewsRead-=400;
+			document.getElementById("main1").innerHTML="<div id=\"rn\" class=\"center\">"+"Thank you for the purchase!"+"</div>";
+			interacted[num-80]=1;
+		}
+		else{
+			document.getElementById("main1").innerHTML="<div id=\"rn\" class=\"center\">"+"You cannot afford it!"+"</div>";
+		}
+	}
+	if(num==93&&(!interacted[num-80])){
+		if(totalNewsClicked>=300){
+			totalNewsClicked-=300;
+			document.getElementById("main1").innerHTML="<div id=\"rn\" class=\"center\">"+"Thank you for the purchase!"+"</div>";
+			interacted[num-80]=1;
+		}
+		else{
+			document.getElementById("main1").innerHTML="<div id=\"rn\" class=\"center\">"+"You cannot afford it!"+"</div>";
+		}
+	}
+	if(num==94&&(!interacted[num-80])&&(interacted[num-81])){
+		if(totalNewsClicked>=600){
+			totalNewsClicked-=600;
+			document.getElementById("main1").innerHTML="<div id=\"rn\" class=\"center\">"+"Thank you for the purchase!"+"</div>";
+			interacted[num-80]=1;
+		}
+		else{
+			document.getElementById("main1").innerHTML="<div id=\"rn\" class=\"center\">"+"You cannot afford it!"+"</div>";
+		}
+	}
+	if(num==95&&(!interacted[num-80])&&(interacted[num-81])){
+		if(totalNewsClicked>=1200){
+			totalNewsClicked-=1200;
+			document.getElementById("main1").innerHTML="<div id=\"rn\" class=\"center\">"+"Thank you for the purchase!"+"</div>";
+			interacted[num-80]=1;
+		}
+		else{
+			document.getElementById("main1").innerHTML="<div id=\"rn\" class=\"center\">"+"You cannot afford it!"+"</div>";
+		}
+	}
+	if(num==78)totalNewsClicked*=Math.floor(Math.random()*2)*2;
 	if(num==79)timeleft=0;
 	currentCapTier=Math.floor(paperclip/5+0.1);
+	document.getElementById("s1").innerHTML="You have read a total of "+totalNewsRead+" news.";
+	document.getElementById("s2").innerHTML="You have clicked on a total of "+totalNewsClicked+" news.";
 	document.getElementById("s3").innerHTML="You have "+paperclip+" paperclips. You need another "+(5+5*currentCapTier-paperclip)+" to unlock more news. Current News size: "+Math.min(rNCount,Math.floor(25*(currentCapTier+1)*(currentCapTier+2)+0.1));
 	Save();
 }
