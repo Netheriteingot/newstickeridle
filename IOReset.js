@@ -24,6 +24,6 @@ function Load(){
 	currentCapTier=Number(localStorage.getItem('cct'));
 	document.getElementById("s1").innerHTML="You have read a total of "+totalNewsRead+" news.";
 	document.getElementById("s2").innerHTML="You have clicked on a total of "+totalNewsClicked+" news.";
-	document.getElementById("s3").innerHTML="You have "+paperclip+" paperclips. You need another "+(5+5*currentCapTier-paperclip)+" to unlock more news. Current: "+Math.min(rNCount,Math.floor(25*(currentCapTier+1)*(currentCapTier+2)+0.1));
+	document.getElementById("s3").innerHTML="You have "+paperclip+" paperclips. You need another "+(5+5*currentCapTier-paperclip)+" to unlock more news. Current News size: "+Math.min(rNCount,Math.floor(25*(currentCapTier+1)*(currentCapTier+2)+0.1));
 }
 setInterval(function(){Save()},5000);
