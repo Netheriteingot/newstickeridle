@@ -1,4 +1,4 @@
-var rNCount=122,interactable=17;
+var rNCount=123,interactable=17;
 var timeleft=8000;
 rN=new Array(
 	"This is the first Newsticker!",
@@ -122,7 +122,8 @@ rN=new Array(
 	"Thanks for Fallen_Cat's cooperation! We have put 2 of its newstickers in the game.",
 	"There shouldn't be a single typo in the game. I never make tpyos.",
 	"8 seconds left. And Counting...",
-	"8 seconds from hell"
+	"8 seconds from hell",
+	"Our discord is at https://discord.gg/P2m29fv8bC. Join it!"
 );
 var totalNewsRead=0,totalNewsClicked=0;
 var paperclip=0,currentCapTier=0;
