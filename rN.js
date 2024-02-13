@@ -1,11 +1,11 @@
-var rNCount=100,interactable=16;
+var rNCount=122,interactable=17;
 var timeleft=8000;
 rN=new Array(
 	"This is the first Newsticker!",
 	"Palescreen is a song written by WyvernP and sang by Madol!",
 	"Nyan Nyan Nyan Nyan Nyan Nyan Nyan Nyan Nyan Nyan",
 	"cbrt(74088)",
-	"This game was created on Oct 29 2023!",
+	"This game was created on Feb 11 2024!",
 	"Congratulations! You got 0.00000 free Paperclips!",
 	"NEWS:HELP!",
 	"Warning! Right Angle Arc",
@@ -84,10 +84,10 @@ rN=new Array(
 	"In recent days, an idle game with only newstickers was rejected by galaxy.",
 	"Now playing: Ether Strike - Akira Complex",
 	"Update log: V20240211 - Added 60 newstickers and basic functions.",
-	"2 - 2 - 2... ok... 6 - 6 - 24' - 32' - HOLD ON!... - 3 5 2 4 4 fff 3 ... NICE!!!",
+	"2 - 2 - 2... ok... 6 - 6 - 24' - 32' - HOLD ON!... - 4 5 2 4 4 fff 3 ... NICE!!!",
 	"You have got past the great Wall, but don't let that wall in your heart stop you. Get over it.",
 	"This is a coarse game. --- yhvr",
-	"Newsticker Idle has added another prestige layer: Storage! Reset your LocalStorage to acquire Storage space. No, Don't do that!",
+	"Newsticker Idle has added another prestige layer: Storage! Reset your LocalStorage to acquire Storage space.",
 	"Clicking on this news gives +1 extra read news! Works with privileges.",
 	"Reading this news gives a wapping +50 clicks! Works with privileges.",
 	"There might be upgrades you can buy somewhere.",
@@ -98,13 +98,36 @@ rN=new Array(
 	"Mouse is overpowered.",
 	"dClick.onclick *= 2",
 	"Now this game should finally be a normal idle game.",
-	"Update log: V20240212 - Added 40 more newstickers, 6 Upgrades and a lot more content!",
+	"Update log: V20240212a - Added 40 more newstickers, 6 Upgrades and a lot more content!",
 	"Coming soon in 8 seconds...",
-	"Do you know that the loading news is there just to prevent you from cheating?"
+	"Do you know that the loading news is there just to prevent you from cheating?",
+	"Update log: V20240412b - Added the first News Dimension.",
+	"ND1 should finally work properly.",
+	"Do you know that there is a length limit on newstickers?",
+	"Click on this news to click on this news!",
+	"Now playing: Dance with Silence - Camellia",
+	"Now playing: Cryout - Ju_E",
+	"Now playing: Destr0yer - Sakuzyo",
+	"Now playing: Cyaegha - USAO",
+	"Now playing: 777 - Rough$ketch",
+	"Now playing: Aleph-0 - LeaF",
+	"I have a crazy idea: 1st 1st News Dimensions Dimensions! It produces 1st News Dimensions!",
+	"You might have to grind for hours just to see this one news.",
+	"Click on this news to remove $1 from a random person's credit card.",
+	"The 114th news. Interesting number.",
+	"Click this to disassemble the newsticker for a paperclip.",
+	"Don't click on everything you see.",
+	"Think twice before clicking. There might be some debuffs here.",
+	"Thanks for Matter Dimensions' cooperation! We have put 5 of its newstickers in the game.",
+	"Thanks for Fallen_Cat's cooperation! We have put 2 of its newstickers in the game.",
+	"There shouldn't be a single typo in the game. I never make tpyos.",
+	"8 seconds left. And Counting...",
+	"8 seconds from hell"
 );
 var totalNewsRead=0,totalNewsClicked=0;
 var paperclip=0,currentCapTier=0;
-var interacted=new Array(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
+var ND1=0;
+var interacted=new Array(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
 function icrr(num){
 	var incr=num;
 	if(interacted[10])incr*=2;
@@ -121,8 +144,30 @@ function icrc(num){
 	totalNewsClicked+=incr;
 	totalNewsClicked=Math.floor(totalNewsClicked+0.1);
 }
+function BuyND1(){
+	if((totalNewsClicked>=2400*Math.floor(Math.pow(3,ND1)))&&(totalNewsRead>=800*Math.floor(Math.pow(3,ND1)))){
+		totalNewsClicked-=2400*Math.floor(Math.pow(3,ND1));
+		totalNewsRead-=800*Math.floor(Math.pow(3,ND1));
+		ND1++;
+	}
+	document.getElementById("main1").innerHTML="<div id=\"rn\" class=\"center\" onclick=\"BuyND1()\"\>"+"Click here to buy 1st News Dimensions. Amount: "+ND1+" Prod.: +"+Math.floor(Math.pow(2,ND1-1))+"R/s +"+3*Math.floor(Math.pow(2,ND1-1))+"C/s. Cost: "+800*Math.floor(Math.pow(3,ND1))+"R "+2400*Math.floor(Math.pow(3,ND1))+"C."+"</div>";
+}
 setInterval(function(){
-	var currentCap=Math.floor(25*(currentCapTier+1)*(currentCapTier+2)+0.1);
+	totalNewsClicked+=3*Math.floor(Math.pow(2,ND1-1));
+	totalNewsRead+=Math.floor(Math.pow(2,ND1-1));
+	document.getElementById("s1").innerHTML="You have read a total of "+totalNewsRead+" news.";
+	document.getElementById("s2").innerHTML="You have clicked on a total of "+totalNewsClicked+" news.";
+},1000);
+function Dim(){
+	timeleft=1e+14;
+	document.getElementById("main1").innerHTML="<div id=\"rn\" class=\"center\" onclick=\"BuyND1()\"\>"+"Click here to buy 1st News Dimensions. Amount: "+ND1+" Prod.: +"+Math.floor(Math.pow(2,ND1-1))+"R/s +"+3*Math.floor(Math.pow(2,ND1-1))+"C/s. Cost: "+800*Math.floor(Math.pow(3,ND1))+"R "+2400*Math.floor(Math.pow(3,ND1))+"C."+"</div>";
+}
+function Ex(){
+	timeleft=8000;
+	document.getElementById("main1").innerHTML="<div id=\"rn\" class=\"center\"\>"+"Newsticker Idle is loading... (This will take 8 seconds.)"+"</div>";
+}
+setInterval(function(){
+	var currentCap=Math.floor((50+50*currentCapTier)+0.1);
 	if(timeleft<=0){
 		rnd=Math.floor(Math.random() * Math.min(rNCount,currentCap));
 		if(rnd>=45&&rnd<=52&&(!interacted[rnd-45]))document.getElementById("main1").innerHTML="<div id=\"rn\" class=\"center\" onclick=\"executeNews("+rnd+")\">"+"Click here to get 1 free paperclip!"+"</div>";
@@ -134,6 +179,7 @@ setInterval(function(){
 		else if(rnd==93&&(!interacted[rnd-80]))document.getElementById("main1").innerHTML="<div id=\"rn\" class=\"center\" onclick=\"executeNews("+rnd+")\">"+"Click here to acquire the privilege of getting 2x clicks by clicking for 300 clicks only!"+"</div>";
 		else if(rnd==94&&(!interacted[rnd-80])&&(interacted[rnd-81]))document.getElementById("main1").innerHTML="<div id=\"rn\" class=\"center\" onclick=\"executeNews("+rnd+")\">"+"Click here to acquire the privilege of getting 2x clicks by clicking for 600 clicks only!"+"</div>";
 		else if(rnd==95&&(!interacted[rnd-80])&&(interacted[rnd-81]))document.getElementById("main1").innerHTML="<div id=\"rn\" class=\"center\" onclick=\"executeNews("+rnd+")\">"+"Click here to acquire the privilege of getting 2x clicks by clicking for 1200 clicks only!"+"</div>";
+		else if(rnd==99&&(!interacted[16])&&(interacted[12])&&(interacted[15]))document.getElementById("main1").innerHTML="<div id=\"rn\" class=\"center\" onclick=\"executeNews("+rnd+")\">"+"Click here to Unlock the first News Dimension!"+"</div>";
 		else document.getElementById("main1").innerHTML="<div id=\"rn\" class=\"center\" onclick=\"executeNews("+rnd+")\">"+rN[rnd]+"</div>";
 		timeleft+=8000;
 		var increment=1;
@@ -239,11 +285,14 @@ function executeNews(num){
 			document.getElementById("main1").innerHTML="<div id=\"rn\" class=\"center\">"+"You cannot afford it!"+"</div>";
 		}
 	}
+	if(num==114)document.getElementById("main1").innerHTML="<div id=\"rn\" class=\"center\">"+"We won't let you do that, otherwise you will be stuck."+"</div>";
+	if(rnd==99&&(!interacted[16])&&(interacted[12])&&(interacted[15]))interacted[16]=1;
 	if(num==78)totalNewsClicked*=Math.floor(Math.random()*2)*2;
 	if(num==79)timeleft=0;
 	currentCapTier=Math.floor(paperclip/5+0.1);
+	if(interacted[16]>0)document.getElementById("s").innerHTML="<text onclick=Dim()>Dimensions</text> | <text onclick=Ex()>Exit</text>";
 	document.getElementById("s1").innerHTML="You have read a total of "+totalNewsRead+" news.";
 	document.getElementById("s2").innerHTML="You have clicked on a total of "+totalNewsClicked+" news.";
-	document.getElementById("s3").innerHTML="You have "+paperclip+" paperclips. You need another "+(5+5*currentCapTier-paperclip)+" to unlock more news. Current News size: "+Math.min(rNCount,Math.floor(25*(currentCapTier+1)*(currentCapTier+2)+0.1));
+	document.getElementById("s3").innerHTML="You have "+paperclip+" paperclips. You need another "+(5+5*currentCapTier-paperclip)+" to unlock more news. Current News size: "+Math.min(rNCount,Math.floor((50+50*currentCapTier)+0.1));
 	Save();
 }
